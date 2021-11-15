@@ -4,23 +4,35 @@ import ContactReadingComp from "../ContactInfo/ContactReadingComp";
 import usePhoneBookApi from "../Hooks/usePhoneBookApi";
 
 const ContactsContainer = () => {
-  const phoneBookApiState = useSelector((state) => state.phoneBookApi);
+  const contacts = useSelector(
+    (state) =>
+      state.phoneBookApi.data.getContactsData?.response?.matchingContacts ?? ""
+  );
+  const [localContacts, setLocalContacts] = useState([]);
   const [contactsComponent, setContactsComponent] = useState(null);
   const { sendRequestToGetMatchingContacts } = usePhoneBookApi();
 
   useEffect(() => {
-    //compare arrays and detect if they have changed
-    buildContactsComponent(contacts);
+    refresh();
+    processContacts();
   }, []);
 
   useEffect(() => {
-    //compare arrays and detect if they have changed
-    buildContactsComponent(contacts);
-  }, []);
+    processContacts();
+  }, [contacts]);
 
   function refresh() {
     sendRequestToGetMatchingContacts("");
   }
+
+  const processContacts = () => {
+    if (contacts !== "") {
+      if (JSON.stringify(localContacts) != JSON.stringify(contacts)) {
+        setLocalContacts(contacts);
+        buildContactsComponent(contacts);
+      }
+    }
+  };
 
   const buildContactsComponent = (contacts) => {
     const contactsUI = contacts.map((contact) => {
@@ -47,4 +59,7 @@ const ContactsContainer = () => {
       <div>{contactsComponent}</div>
     </Card>
   );
-};
+}
+
+
+export default ContactsContainer;

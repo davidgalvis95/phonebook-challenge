@@ -1,9 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useHistory } from "react";
+import { useLocation } from "react-router-dom";
 import "./Search.css";
 import usePhoneBookApi from "../Hooks/usePhoneBookApi";
 
-const Search = React.memo((props) => {
+const Search = React.memo(() => {
   const [enteredFilter, setEnteredFilter] = useState("");
+  const history = useHistory();
+  const currentRoute = useLocation();
   const inputSearchRef = useRef();
   const { sendRequestToGetMatchingContacts } = usePhoneBookApi();
 
@@ -11,6 +14,9 @@ const Search = React.memo((props) => {
     const timer = setTimeout(() => {
       if ((enteredFilter = "")) {
         sendRequestToGetMatchingContacts(transformSearchParams(enteredFilter));
+        if (currentRoute != "/contacts") {
+          history.push("/contacts");
+        }
       }
 
       if (
@@ -22,6 +28,9 @@ const Search = React.memo((props) => {
           sendRequestToGetMatchingContacts(
             transformSearchParams(enteredFilter)
           );
+          if (currentRoute != "/contacts") {
+            history.push("/contacts");
+          }
         } else {
           alert(
             "Please enter a valid search (letters and numbers separated by spaces)"
