@@ -34,7 +34,7 @@ public class PhoneBookController {
         return ResponseEntity.ok(PhoneBookApiResponse.builder()
                 .message("Results processed successfully")
                 .status(HttpStatus.OK.toString())
-                .contactResponse(ContactSearchOutput.builder()
+                .response(ContactSearchOutput.builder()
                         .matchingContacts(matchedContacts)
                         .build())
                 .build());
@@ -46,7 +46,7 @@ public class PhoneBookController {
             return ResponseEntity.ok(PhoneBookApiResponse.builder()
                     .message("Contact created")
                     .status(HttpStatus.OK.toString())
-                    .contactResponse(phoneBookService.createContact(contactRequest))
+                    .response(phoneBookService.createContact(contactRequest))
                     .build());
         } catch (RuntimeException e) {
             return ResponseEntity.of(Optional.of(PhoneBookApiResponse.builder()
@@ -63,7 +63,7 @@ public class PhoneBookController {
             return ResponseEntity.ok(PhoneBookApiResponse.builder()
                     .message(String.format("Contact with id '%s' was updated successfully", id.toString()))
                     .status(HttpStatus.OK.toString())
-                    .contactResponse(phoneBookService.updateContact(contactRequest, id))
+                    .response(phoneBookService.updateContact(contactRequest, id))
                     .build());
         } catch (RuntimeException e) {
             return ResponseEntity.of(Optional.of(PhoneBookApiResponse.builder()

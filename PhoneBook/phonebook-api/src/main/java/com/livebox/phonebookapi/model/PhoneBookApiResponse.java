@@ -11,5 +11,5 @@ public class PhoneBookApiResponse {
 
     private String status;
 
-    private ContactOperationResponse contactResponse;
+    private ContactOperationResponse response;
 }
