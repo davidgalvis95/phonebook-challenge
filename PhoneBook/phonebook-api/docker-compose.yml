@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  phonebook-db:
+    image: postgres
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=phonebookuser
+      - POSTGRES_PASSWORD=phonebookpwd
+      - POSTGRES_DB=phonebook
+    volumes:
+      - phonebook-data:/data/db
+    networks:
+      - shared-net
+
+volumes:
+  phonebook-data:
+
+networks:
+  shared-net:
+    driver: bridge

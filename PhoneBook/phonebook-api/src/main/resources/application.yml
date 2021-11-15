@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5435/phonebook}
+    username: ${USERNAME:phonebookuser}
+    password: ${PASSWORD:phonebookpwd}
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    url: ${spring.datasource.url}
+    driverClassName: ${spring.datasource.driverClassName}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    changeLog: "classpath:db/changelog/main-changelog.yml"
+    dropFirst: false
+#    contexts: dev
+server:
+  port: 9000
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: TRACE
+
