@@ -2,6 +2,8 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import classes from './Navbar.module.css';
 import WeatherLogo from '../Icons/weather/WeatherLogo';
+import {BsFillPersonPlusFill} from "react-icons/bs"
+
 
 const navbar = () => {
     return (
@@ -9,7 +11,7 @@ const navbar = () => {
                 <NavLink to="/home">
                     <WeatherLogo className={classes.WeatherLogo}/>
                 </NavLink>
-                <div className={classes.Bars}/>
+                {/* <div className={classes.Bars}/>
                 <div className={classes.NavMenu}>
                     <NavLink className={classes.NavLink} to="/about" activeStyle="">
                         About
@@ -20,10 +22,10 @@ const navbar = () => {
                     <NavLink className={classes.NavLink} to="/contact-us" activeStyle="">
                         Contact Us
                     </NavLink>
-                </div>
+                </div> */}
                 <div className={classes.NavBtn}>
-                    <NavLink className={classes.NavBtnLink} to="/sign-in">Sign In</NavLink>
-                    <NavLink className={classes.NavBtnLink} to="/sign-up">Sign Up</NavLink>
+                    {/* <NavLink className={classes.NavBtnLink} to="/">Sign In</NavLink> */}
+                    <NavLink className={classes.NavBtnLink} to="/contact/creation"><BsFillPersonPlusFill/></NavLink>
                 </div>
             </div>
     )
