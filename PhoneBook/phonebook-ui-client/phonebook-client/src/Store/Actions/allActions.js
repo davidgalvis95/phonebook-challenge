@@ -1,4 +1,4 @@
-import phoneBookApiActions from './weatherApi';
+import phoneBookApiActions from './phoneBookApiActions';
 
 const allActions = {
     phoneBookApiActions

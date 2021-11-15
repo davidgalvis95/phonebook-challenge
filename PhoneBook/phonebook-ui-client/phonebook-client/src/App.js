@@ -2,9 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
+  Routes,
+  Route
 } from "react-router-dom";
 import Layout from './Layout/Layout';
 import ContactCreateOrUpdateComp from "./ContactInfo/ContactCreateOrUpdateComp";
@@ -13,8 +12,8 @@ import ContactsContainer from "./Container/ContactsContainer";
 function App() {
 
   const routes = (
-    <Switch>
-      <Route path="/contacts" component={<ContactsContainer/>} />
+    <Routes>
+      <Route path="/contacts" element={<ContactsContainer/>} />
       <Route
         path="/contact/creation"
         element={<ContactCreateOrUpdateComp
@@ -22,7 +21,7 @@ function App() {
         />}
       />
       {/* <Route path="/" component={GreetingComponent}/> */}
-    </Switch>);
+    </Routes>);
 
   return (
     <Router>

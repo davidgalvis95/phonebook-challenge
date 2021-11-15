@@ -1,6 +1,7 @@
+import { React, useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import usePhoneBookApi from "../Hooks/usePhoneBookApi";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import {BsCheckCircleFill} from "react-icons/bs"
 
 
@@ -14,7 +15,7 @@ const ContactReadingComp = ({
   handlePostCreateOrUpdate,
 }) => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [phone, setPhone] = useState("");
@@ -24,7 +25,7 @@ const ContactReadingComp = ({
   useEffect(() => {
     setFName(name1);
     setLName(name2);
-    setPhoneNumber(phoneX);
+    setPhone(phoneX);
   }, []);
 
   const contactRequest = {
@@ -40,15 +41,15 @@ const ContactReadingComp = ({
       handlePostCreateOrUpdate();
     } else if (operation === "CREATE") {
       sendRequestToCreateAContact(contact);
-      history.push('/contacts');
+      navigate('/contacts');
       
     }
   };
 
   const mapContactReqProperties = (obj) => {
-    obj[firstName] = fName;
-    obj[lastName] = lName;
-    obj[phoneNumber] = phone;
+    obj['firstName'] = fName;
+    obj['lastName'] = lName;
+    obj['phoneNumber'] = phone;
     return obj;
   };
 

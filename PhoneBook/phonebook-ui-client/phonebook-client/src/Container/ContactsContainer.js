@@ -1,3 +1,4 @@
+import { useState, useEffect, useSelector } from "react";
 import { Grid } from "@material-ui/core";
 import Card from "./Card";
 import ContactReadingComp from "../ContactInfo/ContactReadingComp";
@@ -27,7 +28,7 @@ const ContactsContainer = () => {
 
   const processContacts = () => {
     if (contacts !== "") {
-      if (JSON.stringify(localContacts) != JSON.stringify(contacts)) {
+      if (JSON.stringify(localContacts) !== JSON.stringify(contacts)) {
         setLocalContacts(contacts);
         buildContactsComponent(contacts);
       }
@@ -54,7 +55,7 @@ const ContactsContainer = () => {
     setContactsComponent(contactsUI);
   };
 
-  render(
+  return(
     <Card>
       <div>{contactsComponent}</div>
     </Card>

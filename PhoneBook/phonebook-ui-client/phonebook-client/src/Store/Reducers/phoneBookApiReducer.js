@@ -56,9 +56,10 @@ const phoneBookApiReducer = (state = defaultState, action) => {
         ...state,
         loading: true,
         error: null,
-        //   data: { ...state.data, currentWeather: null, forecast5d3h: null },
       };
     default:
       return state;
   }
 };
+
+export default phoneBookApiReducer;
