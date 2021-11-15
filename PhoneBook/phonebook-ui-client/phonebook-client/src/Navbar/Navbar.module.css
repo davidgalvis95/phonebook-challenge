@@ -1,0 +1,92 @@
+.Navbar {
+    background: #000;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem calc((100vw - 1000px)/2);
+    z-index: 10;
+}
+
+.WeatherLogo {
+    height: 55px;
+    width: 55px;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.Bars {
+    display: none;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .Bars {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 75%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+}
+
+.NavMenu {
+    display: flex;
+    align-items: center;
+    margin-right: -24px;
+}
+
+@media screen and (max-width: 768px){
+    .NavMenu {
+        display: none;
+    }
+}
+
+.NavLink {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    cursor: pointer;
+}
+
+.NavLink:active {
+    color: #88bdbc;
+}
+
+.NavBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 24px;
+}
+
+@media screen and (max-width: 768px){
+    .NavBtn {
+        display: none;
+    }
+}
+
+.NavBtnLink {
+    border-radius: 10px;
+    background: #88bdbc;
+    padding: 10px 22px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.NavBtnLink:hover {
+    transition: all 0.2s ease-in-out;
+    background: #05c46b;
+    color: #fff;
+}
+
+
