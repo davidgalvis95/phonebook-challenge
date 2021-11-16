@@ -8,7 +8,7 @@ The solution basically is a REST api based off Spring JDBC, to create, delete, u
 
 On the other hand, the client is a client built in React which uses Redux, Material UI,  Axios among the most relevant technologies. The architecture of the solution is a layered architecture, shich uses Strategy, Builder and Singleton patterns in the api as the most relevant design patterns to distribute the workload among the different tasks that needed to be performed. 
 
-In order to run the solution, please navigate from the root of the folder of this repository to cd /Docker and run the command docker compose up, if you want to see the logs and docker compose up -d if you do not want to see the logs of the current solution.
+In order to run the solution, please navigate from the root of the folder of this repository to `cd /Docker` and run the command `docker compose up`, if you want to see the logs and `docker compose up -d` if you do not want to see the logs of the current solution.
 
 To further improve this solution, there is still pedging the testing of the same, as well as fixing some small performance issues in the front-end related to the hooks synchronization.
 
