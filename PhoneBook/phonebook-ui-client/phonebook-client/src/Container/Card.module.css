@@ -2,11 +2,9 @@
     padding: 1rem;
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    /* background-color: #fff; */
-    background: rgb(42,60,53);
-    background: linear-gradient(0deg, rgba(42,60,53,0.865983893557423) 0%, rgba(0,0,0,1) 100%);
-    width: 50%;
-    margin: 1rem auto;
+    background: #a29bfe;
+    width: 70%;
+    margin: 1.5rem auto;
 }
 
 @media only screen and (max-width: 400px) {

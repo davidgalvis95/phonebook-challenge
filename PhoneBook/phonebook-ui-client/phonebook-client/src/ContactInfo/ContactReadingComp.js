@@ -3,13 +3,19 @@ import { Grid } from "@material-ui/core";
 import ContactCreateOrUpdateComp from "./ContactCreateOrUpdateComp";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { GrUpdate } from "react-icons/gr";
+import { BsPersonCircle } from "react-icons/bs";
+import Card from "../Container/Card";
+import classes from "./ContactReadingComponent.module.css";
+import usePhoneBookApi from "../Hooks/usePhoneBookApi";
+import { useNavigate } from "react-router-dom";
 
 const ContactReadingComp = ({
   firstName,
   lastName,
   phoneNumber,
   emailAddress,
-  refresh,
+  contactRemovalHandler,
+  dataId
 }) => {
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
@@ -17,6 +23,9 @@ const ContactReadingComp = ({
   const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [updating, setUpdating] = useState(false);
+  const navigate = useNavigate();
+  const { sendRequestToDeleteAContact } =
+  usePhoneBookApi();
 
   useEffect(() => {
     setFName(firstName);
@@ -25,52 +34,58 @@ const ContactReadingComp = ({
     setEmail(emailAddress);
   }, []);
 
-  const handlePreUpdate = (event) => {
+  const handlePreUpdate = () => {
     setUpdating(true);
-    console.log(event.target.getAttribute("key"));
-    setId(event.target.getAttribute("key"));
+    setId(dataId);
   };
 
   const handlePostUpdate = () => {
     setUpdating(false);
-    refresh();
+    navigate("/contacts");
   };
 
-  const handleDelete = (event) => {
-    console.log(event.target.getAttribute("key"));
-    refresh();
+  const handleDelete = () => {
+    sendRequestToDeleteAContact(dataId);
+    navigate("/contacts");
   };
 
   const readingComponent = (
-    <div>
+    <Card
+      style={{
+        backgroundColor: "#ffffff",
+        width: "90%",
+      }}
+    >
       <Grid container>
         <Grid item xs={1}>
-          <div></div>
-        </Grid>
-        <Grid item xs={4}>
-          <div>Name</div>
-          <div>{`${fName} ${lName}`}</div>
-        </Grid>
-        <Grid item xs={2}>
-          <div>Phone</div>
-          <div>{phone}</div>
+          <div>
+            <BsPersonCircle className={classes.icon}/>
+          </div>
         </Grid>
         <Grid item xs={3}>
-          <div>Email Address</div>
-          <div>{email}</div>
+          <div className={classes.description}>Full Name</div>
+          <div className={classes.values}>{`${fName} ${lName}`}</div>
+        </Grid>
+        <Grid item xs={3}>
+          <div className={classes.description}>Phone</div>
+          <div className={classes.values}>{phone}</div>
+        </Grid>
+        <Grid item xs={3}>
+          <div className={classes.description}>Email Address</div>
+          <div className={classes.values}>{email}</div>
         </Grid>
         <Grid item xs={1}>
           <div onClick={handlePreUpdate}>
-            <GrUpdate />
+            <GrUpdate className={classes.icon}/>
           </div>
         </Grid>
         <Grid item xs={1}>
           <div onClick={handleDelete}>
-            <RiDeleteBin5Fill />
+            <RiDeleteBin5Fill className={classes.icon}/>
           </div>
         </Grid>
       </Grid>
-    </div>
+    </Card>
   );
 
   return (

@@ -1,0 +1,42 @@
+  .search {
+    width: 390px;
+    margin:  0.7rem auto;
+  }
+  
+  .searchInput {
+    width: 390px;
+    align-items: center;
+  }
+  
+  .searchInput input {
+    font-family: 'Urbanist', sans-serif;
+    font: inherit;
+    color: black;
+    font-size: 14px;
+    width: 390px;
+    border: 1px solid #a29bfe;
+    border-color: black;
+    border-radius: 20px;
+    padding: 0.25rem 0.4rem;
+    text-align: center;
+    background-color: #a29bfe;
+  }
+  
+  
+  .searchInput input:focus {
+    outline: none;
+    border-color: black;
+  }
+
+  ::placeholder{
+    color: #f1f2f6;
+    font-family: 'Urbanist', sans-serif;
+
+  }
+  
+
+  @media (min-width: 768px) {
+    .search-input {
+      flex-direction: row;
+    }
+  }

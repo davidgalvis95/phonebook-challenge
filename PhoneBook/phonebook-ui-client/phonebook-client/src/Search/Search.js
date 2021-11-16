@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./Search.css";
+import classes from "./Search.module.css";
 import usePhoneBookApi from "../Hooks/usePhoneBookApi";
 
 const Search = React.memo(() => {
@@ -12,9 +12,9 @@ const Search = React.memo(() => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if ((enteredFilter = "")) {
+      if ((enteredFilter === "")) {
         sendRequestToGetMatchingContacts(transformSearchParams(enteredFilter));
-        if (currentRoute != "/contacts") {
+        if (currentRoute !== "/contacts") {
           navigate("/contacts");
         }
       }
@@ -28,7 +28,7 @@ const Search = React.memo(() => {
           sendRequestToGetMatchingContacts(
             transformSearchParams(enteredFilter)
           );
-          if (currentRoute != "/contacts") {
+          if (currentRoute !== "/contacts") {
             navigate("/contacts");
           }
         } else {
@@ -48,11 +48,11 @@ const Search = React.memo(() => {
   };
 
   return (
-    <section className="search">
-      <div className="search-input">
+    <div className={classes.search}>
+      <div className={classes.searchInput}>
         <div>
-          <label>Search contact</label>
           <input
+            placeholder="Search contact"
             ref={inputSearchRef}
             type="text"
             value={enteredFilter}
@@ -60,7 +60,7 @@ const Search = React.memo(() => {
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 });
 

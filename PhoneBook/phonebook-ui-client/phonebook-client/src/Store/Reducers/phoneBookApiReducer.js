@@ -14,21 +14,25 @@ const processResponseHandler = (state, data, query) => {
     case "GET":
       return {
         ...state,
+        loading: false,
         data: { ...state.data, getContactsData: data },
       };
     case "CREATE":
       return {
         ...state,
+        loading: false,
         data: { ...state.data, createContactData: data },
       };
     case "UPDATE":
       return {
         ...state,
+        loading: false,
         data: { ...state.data, updateContactData: data },
       };
     case "DELETE":
       return {
         ...state,
+        loading: false,
         data: { ...state.data, deleteContactData: data },
       };
     default:
@@ -49,7 +53,6 @@ const phoneBookApiReducer = (state = defaultState, action) => {
         ...state,
         loading: false,
         error: action.errorMessage,
-        //   forecastData: {},
       };
     case "CLEAR-ERROR":
       return {

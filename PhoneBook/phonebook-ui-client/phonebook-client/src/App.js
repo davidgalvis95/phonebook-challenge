@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -17,16 +16,14 @@ function App() {
       <Route
         path="/contact/creation"
         element={<ContactCreateOrUpdateComp
-          name1={""} name2={""} phoneX={""} operation={"CREATE"}
+          name1={""} name2={""} phoneX={""} operation={"CREATE"} id={""} handlePostCreateOrUpdate={() => {}}
         />}
       />
       {/* <Route path="/" component={GreetingComponent}/> */}
     </Routes>);
 
   return (
-    <Router>
       <Layout>{routes}</Layout>
-    </Router>
   );
 }
 

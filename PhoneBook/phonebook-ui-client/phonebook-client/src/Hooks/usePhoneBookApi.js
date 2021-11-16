@@ -18,13 +18,12 @@ const usePhoneBookApi = () => {
             console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "GET"));
         }catch(error){
-            dispatch(allActions.phoneBookApiActions.handleError(error.getMessage()));
+            dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
         }
     },[]);
 
     const sendRequestToCreateAContact = useCallback(async (contact) => {
         dispatch(allActions.phoneBookApiActions.sendRequest());
-
 
         const query = `contact`; 
 
@@ -32,8 +31,10 @@ const usePhoneBookApi = () => {
             const result = await phoneBookApi.post(query, contact);
             console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "CREATE"));
+            return result.data;
         }catch(error){
-            dispatch(allActions.phoneBookApiActions.handleError(error.getMessage()));
+            dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
+            return;
         }
     },[]);
 
@@ -47,13 +48,14 @@ const usePhoneBookApi = () => {
             console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "UPDATE"));
         }catch(error){
-            dispatch(allActions.phoneBookApiActions.handleError(error.getMessage()));
+            dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
         }
     },[]);
 
     const sendRequestToDeleteAContact = useCallback(async (id) => {
         dispatch(allActions.phoneBookApiActions.sendRequest());
 
+        console.log("SENDING DELETE REQUEST!")
         const query = `contact?id=${id}`; 
 
         try{
@@ -61,7 +63,7 @@ const usePhoneBookApi = () => {
             console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "DELETE"));
         }catch(error){
-            dispatch(allActions.phoneBookApiActions.handleError(error.getMessage()));
+            dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
         }
     },[]);
 

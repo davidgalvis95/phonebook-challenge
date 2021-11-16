@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
+
+.description {
+  width: 83%;
+  margin-left: 1rem;
+  font-family: "Urbanist", sans-serif;
+}
+
+.textBoxCreate {
+  align-items: center;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 300;
+}
+
+.textBoxUpdate {
+  align-items: center;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+
+.textBoxUpdate input {
+  margin-top: 0.5rem;
+  font: inherit;
+  font-size: 15px;
+  width: 83%;
+  border: 1px solid white;
+  border-color: black;
+  border-radius: 20px;
+  padding: 0.15rem 0.25rem;
+  text-align: center;
+  background-color: white;
+}
+
+.textBoxCreate input {
+  margin-top: 0.5rem;
+  font: inherit;
+  font-size: 15px;
+  width: 83%;
+  border: 1px solid white;
+  border-color: black;
+  border-radius: 20px;
+  padding: 0.15rem 0.25rem;
+  text-align: center;
+  background-color: white;
+}
+
+.textBoxCreate input:focus {
+  outline: none;
+}
+
+.textBoxUpdate input:focus {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .textBoxCreate {
+    flex-direction: row;
+  }
+  .textBoxUpdate {
+    flex-direction: row;
+  }
+}
+
+.checkLogoCreate {
+  display: block;
+  margin: auto;
+  height: 35px;
+  width: 35px;
+  color: #341f97;
+  margin-top: 0.5rem;
+}
+
+.checkLogoUpdate {
+    display: block;
+    margin: auto;
+    height: 35px;
+    width: 35px;
+    color: #78e08f;
+    margin-top: 0.5rem;
+  }

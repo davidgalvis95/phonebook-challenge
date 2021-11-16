@@ -1,17 +1,23 @@
 .Navbar {
-    background: #000;
+    background: #ffffff;
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 0.5rem calc((100vw - 1000px)/2);
     z-index: 10;
 }
 
-.WeatherLogo {
-    height: 55px;
-    width: 55px;
+.logo {
+    height: 45px;
+    width: 165px;
     align-items: center;
     margin-left: 2rem;
+}
+
+.newContactLogo{
+    color: #5f27cd;
+    height:35px;
+    width: 35px;
 }
 
 .Bars {
@@ -87,6 +93,10 @@
     transition: all 0.2s ease-in-out;
     background: #05c46b;
     color: #fff;
+}
+
+.Search {
+    width: 400px;
 }
 
 
