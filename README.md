@@ -1,60 +1,16 @@
-# README #
+### Diagram
 
-### The Phonebook code challenge ###
+![Diagram](Diagram/Diagram.png)
 
-This is the code challenge for JAVA developers. It aims to determine the coding competence on potential candidates.
+### Explanation
 
-# What is this repository for? #
+The solution basically is a REST api based off Spring JDBC, to create, delete, update, and list contacts based on personalized seraches that can match the first name, the last name, or the phone number of a contact. The api could be developed using JPA, because is easier, but the decision of using Spring JDBC, is to gain more control over the repository, and also because during the interviewing process I was told that the team was using Spring JDBC instead of JPA. 
 
-### Quick summary ###
+On the other hand, the client is a client built in React which uses Redux, Material UI,  Axios among the most relevant technologies. The architecture of the solution is a layered architecture, shich uses Strategy, Builder and Singleton patterns in the api as the most relevant design patterns to distribute the workload among the different tasks that needed to be performed. 
 
-The Phonebook code challenge is a non-finished JAVA project that its name explains it. Fork it and show us what you're capable of. Actually, here's the list of requirements that we expect you to accomplish:
+In order to run the solution, please navigate from the root of the folder of this repository to cd /Docker and run the command docker compose up, if you want to see the logs and docker compose up -d if you do not want to see the logs of the current solution.
 
-1. Enable the 'Add contact' functionality
-2. Enable the 'Search contact' functionality. Search must be enabled to be performed by any available criteria.
-3. List the existent contacts. 
-4. Create a DB (do whatever to persist data, not in memory of course -_-)
+To further improve this solution, there is still pedging the testing of the same, as well as fixing some small performance issues in the front-end related to the hooks synchronization.
 
-### Presentation ###
 
-Attach a diagram to explain your solution. You may want to put it under /diagram folder
-
-### Notes ###
-
-1. Apply design patterns taking into account that the system must be scalable.
-
-### Version ###
-
-1.0
-
-# How do I get set up? #
-
-### Summary of set up ###
-
-1. Register into Github (preferred) / Atlassian (optionally) (it's free)
-2. Fork the Phonebook project
-3. **Tip:** If you use Eclipse, you may want to search on Google something like: 'how to fork github/bitbucket project on eclipse'
-
-### Configuration ###
-
-- Once you've forked it, it's all set, you will be ready to go.
-
-### Dependencies ###
-
-- Apache Tomcat 8
-- **Tip:** Again, you may want to search on Google something like: 'download Apache Tomcat 8 for Eclipse'
-
-### Database configuration ###
-
-- Use an RDB MS: Postgresql || SQLite || mySQL.
-
-### How to run tests ###
-
-- Right click on the project
-- Run on server
-
-# Who do I talk to? #
-
-### Contact ###
-
-- Once you finish with the PhoneBook challenge, please let us know and send us an email to gvillegas@livevox.com with cc nposada@livevox.com
+Thanks :)

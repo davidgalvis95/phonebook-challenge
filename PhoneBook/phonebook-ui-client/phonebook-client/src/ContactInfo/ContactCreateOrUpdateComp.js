@@ -40,7 +40,7 @@ const ContactReadingComp = ({
       handlePostCreateOrUpdate();
     } else if (operation === "CREATE") {
       sendRequestToCreateAContact(contact);
-      navigate("/contacts");
+      navigate("/");
     }
   };
 

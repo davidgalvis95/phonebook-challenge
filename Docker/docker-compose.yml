@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  phonebook_api:
+    image: davidgalvis1995/phonebook-api:v4
+    container_name: phonebook_api
+    ports:
+      - "9000:9000"
+    links:
+      - phonebook_db
+    depends_on:
+      - phonebook_db
+    networks:
+      - shared-net
+    environment:
+      - spring_datasource_url=jdbc:postgresql://phonebook_db:5432/phonebook
+  phonebook_db:
+    container_name: phonebook_db
+    image: postgres
+    ports:
+      - "5435:5432"
+    environment:
+      - POSTGRES_USER=phonebookuser
+      - POSTGRES_PASSWORD=phonebookpwd
+      - POSTGRES_DB=phonebook
+    volumes:
+      - phonebook-data:/data/db
+    networks:
+      - shared-net
+  phonebook_client:
+    image: davidgalvis1995/phonebook-api-client:v6
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - phonebook_db
+      - phonebook_api
+    networks:
+      - shared-net
+
+volumes:
+  phonebook-data:
+
+networks:
+  shared-net:
+    driver: bridge

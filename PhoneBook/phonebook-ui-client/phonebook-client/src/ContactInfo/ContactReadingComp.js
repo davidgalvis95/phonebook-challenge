@@ -41,12 +41,12 @@ const ContactReadingComp = ({
 
   const handlePostUpdate = () => {
     setUpdating(false);
-    navigate("/contacts");
+    navigate("/");
   };
 
   const handleDelete = () => {
     sendRequestToDeleteAContact(dataId);
-    navigate("/contacts");
+    navigate("/");
   };
 
   const readingComponent = (

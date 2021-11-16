@@ -12,14 +12,13 @@ function App() {
 
   const routes = (
     <Routes>
-      <Route path="/contacts" element={<ContactsContainer/>} />
       <Route
         path="/contact/creation"
         element={<ContactCreateOrUpdateComp
           name1={""} name2={""} phoneX={""} operation={"CREATE"} id={""} handlePostCreateOrUpdate={() => {}}
-        />}
+          />}
       />
-      {/* <Route path="/" component={GreetingComponent}/> */}
+      <Route path="/" element={<ContactsContainer/>} />
     </Routes>);
 
   return (

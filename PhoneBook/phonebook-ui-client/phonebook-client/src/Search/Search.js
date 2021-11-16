@@ -14,8 +14,8 @@ const Search = React.memo(() => {
     const timer = setTimeout(() => {
       if ((enteredFilter === "")) {
         sendRequestToGetMatchingContacts(transformSearchParams(enteredFilter));
-        if (currentRoute !== "/contacts") {
-          navigate("/contacts");
+        if (currentRoute !== "/") {
+          navigate("/");
         }
       }
 
@@ -28,8 +28,8 @@ const Search = React.memo(() => {
           sendRequestToGetMatchingContacts(
             transformSearchParams(enteredFilter)
           );
-          if (currentRoute !== "/contacts") {
-            navigate("/contacts");
+          if (currentRoute !== "/") {
+            navigate("/");
           }
         } else {
           alert(
