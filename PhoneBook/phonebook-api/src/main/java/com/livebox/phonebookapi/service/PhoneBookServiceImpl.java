@@ -51,8 +51,8 @@ public class PhoneBookServiceImpl implements PhoneBookService{
     public Contact updateContact(final CreateOrUpdateContactRequest contactRequest, final UUID id) {
 
         final Contact contact = Contact.builder()
-                .firstName(contactRequest.getFirstName())
-                .lastName(contactRequest.getLastName())
+                .firstName(contactRequest.getFirstName().toLowerCase())
+                .lastName(contactRequest.getLastName().toLowerCase())
                 .phoneNumber(contactRequest.getPhoneNumber())
                 .build();
         try{
@@ -67,8 +67,8 @@ public class PhoneBookServiceImpl implements PhoneBookService{
     public Contact createContact(final CreateOrUpdateContactRequest contactRequest) {
         try {
             return phoneBookRepository.createContact(Contact.builder()
-                    .firstName(contactRequest.getFirstName())
-                    .lastName(contactRequest.getLastName())
+                    .firstName(contactRequest.getFirstName().toLowerCase())
+                    .lastName(contactRequest.getLastName().toLowerCase())
                     .phoneNumber(contactRequest.getPhoneNumber())
                     .build());
         }catch (final Exception exception){

@@ -22,3 +22,7 @@ logging:
         jdbc:
           core: TRACE
 
+cors:
+  allowedOrigins: http://localhost:3000
+
+

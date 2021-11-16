@@ -56,7 +56,7 @@ public class PhoneBookController {
         }
     }
 
-    @PutMapping("contact/id")
+    @PutMapping("contact")
     public ResponseEntity<PhoneBookApiResponse> updateContact(@RequestParam(value = "id") final UUID id,
                                                               @RequestBody final CreateOrUpdateContactRequest contactRequest) {
         try {
@@ -73,7 +73,7 @@ public class PhoneBookController {
         }
     }
 
-    @DeleteMapping("contact/id")
+    @DeleteMapping("contact")
     public ResponseEntity<PhoneBookApiResponse> deleteContact(@RequestParam(value = "id") final UUID id) {
         try {
             phoneBookService.deleteContact(id);

@@ -11,5 +11,5 @@ public class CreateOrUpdateContactRequest {
 
     String lastName;
 
-    Integer phoneNumber;
+    Long phoneNumber;
 }

@@ -104,9 +104,9 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
             final StringBuilder lastName = new StringBuilder();
             firstNameWords.forEach(word -> {
                 if (firstNameWords.indexOf(word) == 0) {
-                    firstName.append(word);
+                    firstName.append(word.toLowerCase());
                 } else {
-                    firstName.append(" ").append(word);
+                    firstName.append(" ").append(word.toLowerCase());
                 }
             });
             final List<String> lastNameWords = names.stream()
@@ -114,9 +114,9 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
                     .collect(Collectors.toList());
             lastNameWords.forEach(word -> {
                 if (lastNameWords.indexOf(word) == 0) {
-                    lastName.append(word);
+                    lastName.append(word.toLowerCase());
                 } else {
-                    lastName.append(" ").append(word);
+                    lastName.append(" ").append(word.toLowerCase());
                 }
             });
             pairsOfNames.add(Pair.of(firstName.toString(), lastName.toString()));

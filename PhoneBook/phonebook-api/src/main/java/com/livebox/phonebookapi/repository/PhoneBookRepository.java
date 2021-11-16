@@ -2,11 +2,12 @@ package com.livebox.phonebookapi.repository;
 
 import com.livebox.phonebookapi.model.Contact;
 
+import java.sql.SQLDataException;
 import java.util.List;
 import java.util.UUID;
 
 public interface PhoneBookRepository {
-    Contact createContact(final Contact contact);
+    Contact createContact(final Contact contact) throws SQLDataException;
 
     Contact updateContact(final Contact contact, final UUID id);
 

@@ -16,7 +16,7 @@ public class ContactMapper implements RowMapper<Contact> {
                 .id((UUID) resultSet.getObject("id"))
                 .firstName(resultSet.getString("first_name"))
                 .lastName(resultSet.getString("last_name"))
-                .phoneNumber(resultSet.getInt("phone_number"))
+                .phoneNumber(resultSet.getLong("phone_number"))
                 .build();
     }
 }

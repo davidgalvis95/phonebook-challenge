@@ -19,5 +19,5 @@ public class Contact implements ContactOperationResponse {
 
     private String lastName;
 
-    private Integer phoneNumber;
+    private Long phoneNumber;
 }
