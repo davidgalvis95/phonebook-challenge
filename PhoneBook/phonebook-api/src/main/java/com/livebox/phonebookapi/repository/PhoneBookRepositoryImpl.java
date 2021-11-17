@@ -41,7 +41,7 @@ public class PhoneBookRepositoryImpl implements PhoneBookRepository{
     private static final String FIND_CONTACTS = "SELECT * FROM contacts";
 
     private static final String FIND_CONTACT_BY_PHONE_NUMBER = "SELECT id, first_name, last_name, phone_number " +
-            "FROM contacts WHERE phone_number LIKE :firstName";;
+            "FROM contacts WHERE phone_number=:phoneNumber";;
 
     private static final String FIND_CONTACT_BY_ARGUMENTS = "SELECT id, first_name, last_name, phone_number FROM contacts" +
             " WHERE first_name LIKE :firstName AND last_name LIKE :lastName";
@@ -53,7 +53,7 @@ public class PhoneBookRepositoryImpl implements PhoneBookRepository{
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public Contact createContact(final Contact contact) throws SQLDataException {
+    public Contact createContact(final Contact contact) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         final SqlParameterSource parameters = new MapSqlParameterSource()
@@ -100,14 +100,14 @@ public class PhoneBookRepositoryImpl implements PhoneBookRepository{
     }
 
     @Override
-    public List<Contact> filterContactsByMatchingNumber(final Integer number) {
-        final Map<String, String> parameters = new HashMap<>();
-        parameters.put("phoneNumber", number + "%");
+    public List<Contact> filterContactsByMatchingNumber(final Long number) {
+        final Map<String, Long> parameters = new HashMap<>();
+        parameters.put("phoneNumber", number);
         return namedParameterJdbcTemplate.query(FIND_CONTACT_BY_PHONE_NUMBER, parameters, new ContactMapper());
     }
 
     @Override
-    public List<Contact> filterContactByMatchingMultipleParameters(final Integer number, final String firstName, final String lastName) {
+    public List<Contact> filterContactByMatchingMultipleParameters(final Long number, final String firstName, final String lastName) {
 
         if(number == null){
             if(firstName.isEmpty()){

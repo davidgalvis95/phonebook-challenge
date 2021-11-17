@@ -26,7 +26,7 @@ const ContactsContainer = () => {
   const loading = useSelector((state) => state.phoneBookApi.loading);
   const [localContacts, setLocalContacts] = useState([]);
   const [contactsComponent, setContactsComponent] = useState(null);
-  const { sendRequestToGetMatchingContacts } = usePhoneBookApi();
+  const { sendRequestToGetAllTheContacts } = usePhoneBookApi();
 
   useEffect(() => {
     processContacts();
@@ -44,7 +44,7 @@ const ContactsContainer = () => {
   }, [searchResponse?.matchingContacts, loading, deletedResponse]);
 
   function refresh() {
-    sendRequestToGetMatchingContacts("");
+    sendRequestToGetAllTheContacts();
   }
 
   const processContacts = () => {

@@ -8,6 +8,20 @@ const usePhoneBookApi = () => {
     
     const dispatch = useDispatch();
 
+    const sendRequestToGetAllTheContacts = useCallback(async () => {
+        dispatch(allActions.phoneBookApiActions.sendRequest());
+
+        const query = 'contacts'; 
+
+        try{
+            const result = await phoneBookApi.get(query);
+            console.log(result);
+            dispatch(allActions.phoneBookApiActions.processResponse(result.data, "GET"));
+        }catch(error){
+            dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
+        }
+    },[]);
+
     const sendRequestToGetMatchingContacts = useCallback(async (params) => {
         dispatch(allActions.phoneBookApiActions.sendRequest());
 
@@ -74,6 +88,7 @@ const usePhoneBookApi = () => {
         sendRequestToCreateAContact: sendRequestToCreateAContact,
         sendRequestToUpdateAContact: sendRequestToUpdateAContact,
         sendRequestToDeleteAContact: sendRequestToDeleteAContact,
+        sendRequestToGetAllTheContacts: sendRequestToGetAllTheContacts,
         clearError: clearError
     }
 }

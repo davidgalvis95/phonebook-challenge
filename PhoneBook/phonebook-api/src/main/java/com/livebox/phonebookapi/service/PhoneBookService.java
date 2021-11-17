@@ -3,6 +3,7 @@ package com.livebox.phonebookapi.service;
 import com.livebox.phonebookapi.model.Contact;
 import com.livebox.phonebookapi.model.CreateOrUpdateContactRequest;
 
+import java.sql.SQLDataException;
 import java.util.List;
 import java.util.UUID;
 

@@ -28,10 +28,10 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
     @Override
     public <T> List<Contact> getSearchingParameters(List<T> params) {
 
-        final List<Integer> phoneNumber = params.stream()
+        final List<Long> phoneNumber = params.stream()
                 .map(element -> {
                     try {
-                        return Integer.valueOf((String) element);
+                        return Long.parseLong((String) element);
                     } catch (final NumberFormatException numberFormatException) {
                         return null;
                     }
@@ -48,7 +48,7 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
                 final List<String> paramsWithoutNumber = params.stream()
                         .filter(element -> {
                             try {
-                                Integer.valueOf((String) element);
+                                Long.parseLong((String) element);
                                 return false;
                             } catch (final NumberFormatException numberFormatException) {
                                 return true;
@@ -68,7 +68,7 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
         }
     }
 
-    private <T> List<Contact> processSearch(final List<T> parameters, final Integer phoneNumber) {
+    private <T> List<Contact> processSearch(final List<T> parameters, final Long phoneNumber) {
         final List<Contact> nonReversedResults = executeSearchesForPossibleCombinations(parameters, phoneNumber);
 
         Collections.reverse(parameters);
@@ -79,7 +79,7 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
                 .collect(Collectors.toList());
     }
 
-    private <T> List<Contact> executeSearchesForPossibleCombinations(final List<T> parameters, final Integer phoneNumber) {
+    private <T> List<Contact> executeSearchesForPossibleCombinations(final List<T> parameters, final Long phoneNumber) {
         final List<Pair<String, String>> combinationsForSearch = getAllThePossibleCombinationsOfFirstNameAndLastName((List<String>) parameters);
 
         final List<Contact> getResultsOfPossibleMatches = combinationsForSearch.stream()
@@ -92,7 +92,7 @@ public class MultipleParamsLookupStrategy extends ContactLookupStrategy {
         return getResultsOfPossibleMatches;
     }
 
-    private CompletableFuture<List<Contact>> findContactsByCriteria(final Integer phoneNumber, final String firstName, final String lastName) {
+    private CompletableFuture<List<Contact>> findContactsByCriteria(final Long phoneNumber, final String firstName, final String lastName) {
         return CompletableFuture.supplyAsync(() -> phoneBookRepository.filterContactByMatchingMultipleParameters(phoneNumber, firstName, lastName), taskExecutor);
     }
 

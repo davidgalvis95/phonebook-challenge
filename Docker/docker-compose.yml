@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   phonebook_api:
-    image: davidgalvis1995/phonebook-api:v4
+    image: davidgalvis1995/phonebook-api:v5
     container_name: phonebook_api
     ports:
       - "9000:9000"
@@ -27,7 +27,7 @@ services:
     networks:
       - shared-net
   phonebook_client:
-    image: davidgalvis1995/phonebook-api-client:v6
+    image: davidgalvis1995/phonebook-api-client:v7
     ports:
       - "3000:80"
     restart: always

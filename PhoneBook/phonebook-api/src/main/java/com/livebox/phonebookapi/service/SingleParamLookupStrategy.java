@@ -22,7 +22,7 @@ public class SingleParamLookupStrategy extends ContactLookupStrategy{
         final String stringParam = (String) param;
 
         try{
-            int phoneNumber = Integer.parseInt(stringParam);
+            long phoneNumber = Long.parseLong(stringParam);
             return phoneBookRepository.filterContactsByMatchingNumber(phoneNumber);
         }catch(NumberFormatException numberFormatException){
             return phoneBookRepository.filterContactsByMatchingName(stringParam.toLowerCase());

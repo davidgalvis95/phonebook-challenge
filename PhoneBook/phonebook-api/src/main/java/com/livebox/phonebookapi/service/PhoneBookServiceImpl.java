@@ -7,9 +7,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLDataException;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executor;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,13 +27,14 @@ public class PhoneBookServiceImpl implements PhoneBookService{
         if(parameters.isEmpty()){
             return phoneBookRepository.findAll();
         }
+            final List<String> newParams = parameters.stream().distinct().collect(Collectors.toList());
             ContactLookupStrategy contactLookupStrategy;
-            if(parameters.size() == 1){
+            if(newParams.size() == 1){
                 contactLookupStrategy = new SingleParamLookupStrategy(phoneBookRepository);
-                return contactLookupStrategy.getSearchingParameters(parameters.get(0));
+                return contactLookupStrategy.getSearchingParameters(newParams.get(0));
             }else{
                 contactLookupStrategy = new MultipleParamsLookupStrategy(phoneBookRepository, taskExecutor);
-                return contactLookupStrategy.getSearchingParameters(parameters);
+                return contactLookupStrategy.getSearchingParameters(newParams);
             }
 
     }

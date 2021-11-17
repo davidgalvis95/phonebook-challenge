@@ -8,12 +8,12 @@ const Search = React.memo(() => {
   const navigate = useNavigate();
   const currentRoute = useLocation();
   const inputSearchRef = useRef();
-  const { sendRequestToGetMatchingContacts } = usePhoneBookApi();
+  const { sendRequestToGetMatchingContacts, sendRequestToGetAllTheContacts } = usePhoneBookApi();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if ((enteredFilter === "")) {
-        sendRequestToGetMatchingContacts(transformSearchParams(enteredFilter));
+      if ((enteredFilter === ""|| !enteredFilter)) {
+        sendRequestToGetAllTheContacts();
         if (currentRoute !== "/") {
           navigate("/");
         }

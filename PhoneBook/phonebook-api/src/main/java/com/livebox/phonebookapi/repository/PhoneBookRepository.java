@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface PhoneBookRepository {
-    Contact createContact(final Contact contact) throws SQLDataException;
+    Contact createContact(final Contact contact);
 
     Contact updateContact(final Contact contact, final UUID id);
 
@@ -17,7 +17,7 @@ public interface PhoneBookRepository {
 
     List<Contact> filterContactsByMatchingName(final String name);
 
-    List<Contact> filterContactsByMatchingNumber(final Integer number);
+    List<Contact> filterContactsByMatchingNumber(final Long number);
 
-    List<Contact> filterContactByMatchingMultipleParameters(final Integer number, final String firstName, final String lastName);
+    List<Contact> filterContactByMatchingMultipleParameters(final Long number, final String firstName, final String lastName);
 }

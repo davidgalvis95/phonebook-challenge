@@ -1,29 +1,36 @@
 package com.livebox.phonebookapi.controller;
 
-import com.livebox.phonebookapi.model.Contact;
-import com.livebox.phonebookapi.model.ContactSearchOutput;
-import com.livebox.phonebookapi.model.CreateOrUpdateContactRequest;
-import com.livebox.phonebookapi.model.PhoneBookApiResponse;
+import com.livebox.phonebookapi.model.*;
 import com.livebox.phonebookapi.service.PhoneBookService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLDataException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@RequestMapping("/api/v1/phone-book/")
+@RequestMapping(PhoneBookApiPaths.PHONEBOOK_API_BASE_PATH)
 @RestController
 @AllArgsConstructor
 public class PhoneBookController {
 
     private final PhoneBookService phoneBookService;
 
-    @GetMapping("contacts")
+    @GetMapping(PhoneBookApiPaths.PHONEBOOK_API_READER_PATH)
     public ResponseEntity<PhoneBookApiResponse> searchByCriteria(@RequestParam(value = "searchingParams", required = false) final List<String> params) {
-        final List<Contact> matchedContacts = phoneBookService.searchContactsByCriteria(params);
+        final List<Contact> matchedContacts;
+        if (params == null || params.isEmpty()) {
+            matchedContacts = phoneBookService.searchContactsByCriteria(Collections.emptyList());
+
+        } else {
+            matchedContacts = phoneBookService.searchContactsByCriteria(params);
+
+        }
+
         if (matchedContacts.isEmpty()) {
             return ResponseEntity.of(Optional.of(PhoneBookApiResponse.builder()
                     .message("No contacts match the searching criteria")
@@ -40,7 +47,7 @@ public class PhoneBookController {
                 .build());
     }
 
-    @PostMapping("contact")
+    @PostMapping(PhoneBookApiPaths.PHONEBOOK_API_UPDATE_PATH)
     public ResponseEntity<PhoneBookApiResponse> createContact(@RequestBody final CreateOrUpdateContactRequest contactRequest) {
         try {
             return ResponseEntity.ok(PhoneBookApiResponse.builder()
@@ -56,7 +63,7 @@ public class PhoneBookController {
         }
     }
 
-    @PutMapping("contact")
+    @PutMapping(PhoneBookApiPaths.PHONEBOOK_API_UPDATE_PATH)
     public ResponseEntity<PhoneBookApiResponse> updateContact(@RequestParam(value = "id") final UUID id,
                                                               @RequestBody final CreateOrUpdateContactRequest contactRequest) {
         try {
@@ -73,7 +80,7 @@ public class PhoneBookController {
         }
     }
 
-    @DeleteMapping("contact")
+    @DeleteMapping(PhoneBookApiPaths.PHONEBOOK_API_UPDATE_PATH)
     public ResponseEntity<PhoneBookApiResponse> deleteContact(@RequestParam(value = "id") final UUID id) {
         try {
             phoneBookService.deleteContact(id);
