@@ -14,25 +14,14 @@ const ContactReadingComp = ({
   lastName,
   phoneNumber,
   emailAddress,
-  contactRemovalHandler,
+  handlePostUpdateFromContainer,
   dataId
 }) => {
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [id, setId] = useState("");
   const [updating, setUpdating] = useState(false);
   const navigate = useNavigate();
   const { sendRequestToDeleteAContact } =
   usePhoneBookApi();
-
-  useEffect(() => {
-    setFName(firstName);
-    setLName(lastName);
-    setPhone(phoneNumber);
-    setEmail(emailAddress);
-  }, []);
 
   const handlePreUpdate = () => {
     setUpdating(true);
@@ -40,8 +29,8 @@ const ContactReadingComp = ({
   };
 
   const handlePostUpdate = () => {
-    setUpdating(false);
-    navigate("/");
+    setUpdating(false);  
+    handlePostUpdateFromContainer();
   };
 
   const handleDelete = () => {
@@ -64,15 +53,15 @@ const ContactReadingComp = ({
         </Grid>
         <Grid item xs={3}>
           <div className={classes.description}>Full Name</div>
-          <div className={classes.values}>{`${fName} ${lName}`}</div>
+          <div className={classes.values}>{`${firstName} ${lastName}`}</div>
         </Grid>
         <Grid item xs={3}>
           <div className={classes.description}>Phone</div>
-          <div className={classes.values}>{phone}</div>
+          <div className={classes.values}>{phoneNumber}</div>
         </Grid>
         <Grid item xs={3}>
           <div className={classes.description}>Email Address</div>
-          <div className={classes.values}>{email}</div>
+          <div className={classes.values}>{emailAddress}</div>
         </Grid>
         <Grid item xs={1}>
           <div onClick={handlePreUpdate}>
@@ -92,10 +81,10 @@ const ContactReadingComp = ({
     <div>
       {updating ? (
         <ContactCreateOrUpdateComp
-          name1={fName}
-          name2={lName}
+          name1={firstName}
+          name2={lastName}
           id={id}
-          phoneX={phone}
+          phoneX={phoneNumber}
           operation={"UPDATE"}
           handlePostCreateOrUpdate={handlePostUpdate}
         />

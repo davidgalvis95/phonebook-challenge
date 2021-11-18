@@ -15,7 +15,6 @@ const usePhoneBookApi = () => {
 
         try{
             const result = await phoneBookApi.get(query);
-            console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "GET"));
         }catch(error){
             dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
@@ -43,7 +42,6 @@ const usePhoneBookApi = () => {
 
         try{
             const result = await phoneBookApi.post(query, contact);
-            console.log(result);
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "CREATE"));
             return result.data;
         }catch(error){
@@ -56,10 +54,8 @@ const usePhoneBookApi = () => {
         dispatch(allActions.phoneBookApiActions.sendRequest());
 
         const query = `contact?id=${id}`; 
-
         try{
-            const result = await phoneBookApi.put(query, contact);
-            console.log(result);
+            const result = await phoneBookApi.put(query, contact);          
             dispatch(allActions.phoneBookApiActions.processResponse(result.data, "UPDATE"));
         }catch(error){
             dispatch(allActions.phoneBookApiActions.handleError("Something went wrong"));
@@ -68,8 +64,6 @@ const usePhoneBookApi = () => {
 
     const sendRequestToDeleteAContact = useCallback(async (id) => {
         dispatch(allActions.phoneBookApiActions.sendRequest());
-
-        console.log("SENDING DELETE REQUEST!")
         const query = `contact?id=${id}`; 
 
         try{

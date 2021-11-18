@@ -6,7 +6,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons//io";
 import Card from "../Container/Card";
 import classes from "./ContactCreateOrUpdateComp.module.css";
 
-const ContactReadingComp = ({
+const ContactCreateOrUpdateComp = ({
   name1,
   name2,
   phoneX,
@@ -123,4 +123,4 @@ const ContactReadingComp = ({
   );
 };
 
-export default ContactReadingComp;
+export default ContactCreateOrUpdateComp;

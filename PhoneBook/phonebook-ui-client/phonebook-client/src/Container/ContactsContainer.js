@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect, useCallback } from "react";
+import { shallowEqual, useSelector } from "react-redux";
 import Card from "./Card";
 import ContactReadingComp from "../ContactInfo/ContactReadingComp";
 import usePhoneBookApi from "../Hooks/usePhoneBookApi";
 
-
-//TODO improve glitches when loading the updates and creations of contacts into the search
 const ContactsContainer = () => {
   const searchResponse = useSelector(
-    (state) =>
-      state.phoneBookApi.data.getContactsData?.response
+    (state) => state.phoneBookApi.data.getContactsData?.response, shallowEqual
   );
 
   const newContact = useSelector(
@@ -29,97 +26,91 @@ const ContactsContainer = () => {
   const { sendRequestToGetAllTheContacts } = usePhoneBookApi();
 
   useEffect(() => {
-    processContacts();
     additionHandler();
-  }, [searchResponse?.matchingContacts, loading, newContact]);
+  }, [newContact]);
 
   useEffect(() => {
     processContacts();
-    contactUpdateHandler();
-  }, [searchResponse?.matchingContacts, loading, updatedContact]);
+  }, [JSON.stringify(searchResponse?.matchingContacts)]);
 
   useEffect(() => {
-    processContacts();
     contactRemovalHandler();
-  }, [searchResponse?.matchingContacts, loading, deletedResponse]);
+  }, [deletedResponse]);
 
-  function refresh() {
-    sendRequestToGetAllTheContacts();
-  }
+  useEffect(() => {
+    contactUpdateHandler();
+  },[updatedContact])
 
-  const processContacts = () => {
+
+  const processContacts = useCallback(() => {
     if (searchResponse?.matchingContacts != null) {
-      if (JSON.stringify(localContacts) !== JSON.stringify(searchResponse?.matchingContacts)) {
         setLocalContacts(searchResponse.matchingContacts);
         buildContactsComponent(searchResponse.matchingContacts);
-      }
     }
-  };
+  },[]);
 
-  const contactRemovalHandler = () => {
+  const contactRemovalHandler = useCallback(() => {
     if (deletedResponse && !loading) {
       const contactsNew = [...localContacts];
       const contactsWithoutDeleted = contactsNew.filter(
         (contact) => contact.id !== deletedResponse.split("'")[1]
       );
-      setLocalContacts(contactsWithoutDeleted);
       buildContactsComponent(contactsWithoutDeleted);
+      setLocalContacts(contactsWithoutDeleted);
     }
-  };
+  },[]);
 
-  const contactUpdateHandler = () => {
+  const contactUpdateHandler = useCallback(() => {
     if (!loading && updatedContact) {
-      const contactsNew = [...localContacts];
-      const contactToUpdate = contactsNew.filter(
-        (contact) => contact.id === updatedContact.id
-      );
-      contactsNew.splice(
-        contactsNew.findIndex((contact) => contact.id === updatedContact.id),
-        1,
-        updatedContact
-      );
-      setLocalContacts(contactsNew);
-      buildContactsComponent(contactsNew);
+    sendRequestToGetAllTheContacts();
+    const contactsNew = [...localContacts];
+    contactsNew.splice(
+      contactsNew.findIndex((contact) => contact.id === updatedContact.id),
+      1,
+      updatedContact
+    );
+    setLocalContacts(contactsNew);
+    buildContactsComponent(contactsNew);
     }
-  };
+  },[]);
 
-  const additionHandler = () => {
+  const additionHandler = useCallback(() => {
     if (!loading && newContact) {
       const contactsNew = [...localContacts];
       contactsNew.push(newContact);
       setLocalContacts(contactsNew);
       buildContactsComponent(contactsNew);
     }
-  };
+  },[]);
 
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   const buildContactsComponent = (contacts) => {
-    const contactsUI = contacts.map((contact) => {
-      //TODO make implementation of email in api and UI
-      return (
-        <div>
-          <ContactReadingComp
-            key={contact.id}
-            firstName={capitalize(contact.firstName)}
-            lastName={capitalize(contact.lastName)}
-            phoneNumber={contact.phoneNumber}
-            emailAddress={"example@example.com"}
-            refresh={refresh}
-            dataId={contact.id}
-          />
-        </div>
-      );
-    });
-
-    setContactsComponent(contactsUI);
+    let contactsUI = null;
+    if (!loading && searchResponse) {
+      contactsUI = contacts.map((contact) => {
+        //TODO make implementation of email in api and UI
+        return (
+            <ContactReadingComp
+              key={contact.id}
+              firstName={capitalize(contact.firstName)}
+              lastName={capitalize(contact.lastName)}
+              phoneNumber={contact.phoneNumber}
+              emailAddress={"example@example.com"}
+              dataId={contact.id}
+              handlePostUpdateFromContainer={contactUpdateHandler}
+            />
+        );
+      });
+      setContactsComponent(contactsUI);
+    }
   };
 
   return (
     <Card>
-      <div>{loading || !searchResponse ? null : contactsComponent}</div>
+      <div>{contactsComponent}</div>
     </Card>
   );
 };
