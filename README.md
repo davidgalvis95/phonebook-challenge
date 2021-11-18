@@ -10,7 +10,11 @@ On the other hand, the client is a client built in React which uses Redux, Mater
 
 In order to run the solution, please navigate from the root of the folder of this repository to `cd /Docker` and run the command `docker compose up`, if you want to see the logs and `docker compose up -d` if you do not want to see the logs of the current solution.
 
-To further improve this solution, there is still pedging the testing of the same, as well as fixing some small performance issues in the front-end related to the hooks synchronization.
+The ports that are exposed by the different layers are the following ones, in case that you decide to test that in your local machine:
+* Client: `localhost:3000`
+* API: `localhost:9000`
+* DB: `localhost:5435`
+* TEST DB: Random port, you can chek that out by looking at the exposed port of the postgres DB container, using `docker ps` command.
 
 
 Thanks :)
