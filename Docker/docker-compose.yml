@@ -27,7 +27,7 @@ services:
     networks:
       - shared-net
   phonebook_client:
-    image: davidgalvis1995/phonebook-api-client:v7
+    image: davidgalvis1995/phonebook-api-client:v8
     ports:
       - "3000:80"
     restart: always
